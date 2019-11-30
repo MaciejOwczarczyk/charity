@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -27,8 +28,8 @@
         </ul>
 
         <ul>
-            <li><a href="index.html" class="btn btn--without-border active">Start</a></li>
-            <li><a href="index.html#steps" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="/donation/add" class="btn btn--without-border active">Start</a></li>
+            <li><a href="" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="index.html#about-us" class="btn btn--without-border">O nas</a></li>
             <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
@@ -86,60 +87,26 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form:form method="post" modelAttribute="donation">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
                 <div class="form-group form-group--checkbox">
-                    <label>
-                        <input
-                                type="checkbox"
-                                name="categories"
-                                value="clothes-to-use"
-                        />
-                        <span class="checkbox"></span>
-                        <span class="description"
-                        >ubrania, które nadają się do ponownego użycia</span
-                        >
-                    </label>
+                    <c:forEach items="${categories}" var="category">
+                        <label>
+<%--                            <input type="checkbox" name="categories" value="clothes-to-use"/>--%>
+                            <form:checkbox path="category" value="${category.name}"/>
+                            <span class="checkbox"></span>
+                            <span class="description">${category.name}</span>
+                        </label>
+                        <br>
+                    </c:forEach>
+
+
                 </div>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input
-                                type="checkbox"
-                                name="categories"
-                                value="clothes-useless"
-                        />
-                        <span class="checkbox"></span>
-                        <span class="description">ubrania, do wyrzucenia</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="toys" />
-                        <span class="checkbox"></span>
-                        <span class="description">zabawki</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="books" />
-                        <span class="checkbox"></span>
-                        <span class="description">książki</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="other" />
-                        <span class="checkbox"></span>
-                        <span class="description">inne</span>
-                    </label>
-                </div>
+<%--                <form:checkboxes path="category" items="${categories}" itemValue="id" itemLabel="name"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -153,7 +120,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="bags" step="1" min="1" />
+                        <form:input path="quantity" type="number" step="1" min="1"/>
                     </label>
                 </div>
 
@@ -162,7 +129,6 @@
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
-
 
 
             <!-- STEP 4 -->
@@ -303,10 +269,11 @@
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="submit" class="btn">Potwierdzam</button>
+<%--                    <button type="submit" class="btn">Potwierdzam</button>--%>
+                    <input type="submit" class="btn" value="Potwierdzam">
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </section>
 

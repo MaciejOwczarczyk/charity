@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -11,23 +12,12 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="<c:url value="../../../resources/css/style.css"/>"/>
+
+
 </head>
 <body>
 <header class="header--main-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-        </ul>
-
-        <ul>
-            <li><a href="#" class="btn btn--without-border active">Start</a></li>
-            <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
-    </nav>
+    <%@ include file="../../../WEB-INF/views/header.jsp"%>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -41,7 +31,7 @@
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>13</em>
+            <em>${trashes}</em>
 
             <h3>Oddanych worków</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
@@ -49,7 +39,7 @@
         </div>
 
         <div class="stats--item">
-            <em>5</em>
+            <em>${noOfInstitutions}</em>
             <h3>Wspartych organizacji</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>
@@ -58,7 +48,7 @@
     </div>
 </section>
 
-<section class="steps">
+<section id="steps" class="steps">
     <h2>Wystarczą 4 proste kroki</h2>
 
     <div class="steps--container">
@@ -87,7 +77,7 @@
     <a href="#" class="btn btn--large">Załóż konto</a>
 </section>
 
-<section class="about-us">
+<section id="about-us"class="about-us">
     <div class="about-us--text">
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
@@ -98,7 +88,7 @@
     </div>
 </section>
 
-<section class="help">
+<section id="help" class="help">
     <h2>Komu pomagamy?</h2>
 
     <!-- SLIDE 1 -->
@@ -107,30 +97,24 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
+
+        <c:forEach items="${institutions}" var="institution" varStatus="status">
             <li>
-                <div class="col">
-                    <div class="title">Fundacja "Dbam o Zdrowie"</div>
-                    <div class="subtitle">Cel i misja: Pomoc dzieciom z ubogich rodzin.</div>
-                </div>
-
-                <div class="col">
-                    <div class="title">Fundacja "A kogo"</div>
-                    <div class="subtitle">Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.</div>
-                </div>
+                <c:if test="${status.index % 2 == 0}">
+                    <div class="col">
+                        <div class="title">${institution.name}</div>
+                        <div class="subtitle">${institution.description}</div>
+                    </div>
+                    <br>
+                </c:if>
+                <c:if test="${status.index % 2 != 0}">
+                    <div class="col">
+                        <div class="title">${institution.name}</div>
+                        <div class="subtitle">${institution.description}</div>
+                    </div>
+                </c:if>
             </li>
-
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja “Dla dzieci"</div>
-                    <div class="subtitle">Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.</div>
-                </div>
-                <div class="col">
-                    <div class="title">Fundacja “Bez domu”</div>
-                    <div class="subtitle">Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania</div>
-                </div>
-
-            </li>
-
+        </c:forEach>
         </ul>
     </div>
 

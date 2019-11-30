@@ -6,8 +6,8 @@
     <link href='<c:url value="../../resources/css/style.css"/>' rel="stylesheet" type="text/css">
 </head>
 <body>
-<footer class="footer-section pt-3 pb-3">
-    <div class="contact">
+<footer>
+    <div id="contact" class="contact">
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
         <form>
