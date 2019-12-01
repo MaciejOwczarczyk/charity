@@ -92,21 +92,17 @@
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
-                <div class="form-group form-group--checkbox">
-                    <c:forEach items="${categories}" var="category">
+                <c:forEach items="${categories}" var="category">
+                    <div class="form-group form-group--checkbox">
                         <label>
-<%--                            <input type="checkbox" name="categories" value="clothes-to-use"/>--%>
-                            <form:checkbox path="category" value="${category.name}"/>
+                            <input type="checkbox" name="categories" value="${category.id}"/>
+<%--                            <form:checkbox path="categoryList" value="${category.id}" name="categories"/>--%>
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
                         </label>
-                        <br>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
 
-
-                </div>
-
-<%--                <form:checkboxes path="category" items="${categories}" itemValue="id" itemLabel="name"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -135,33 +131,19 @@
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old" />
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
-                  </div>
-                </span>
-                    </label>
-                </div>
+                <c:forEach items="${institutions}" var="answer" varStatus="loop">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <form:radiobutton path="institution" value="${answer.id}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                                <div class="title">${answer.name}</div>
+                                <div class="subtitle">${answer.description}</div>
+                            </span>
+                        </label>
+                    </div>
+                </c:forEach>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old" />
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-                    </label>
-                </div>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -177,40 +159,45 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input type="text" name="address" /> </label>
-                        </div>
-
-                        <div class="form-group form-group--inline">
-                            <label> Miasto <input type="text" name="city" /> </label>
-                        </div>
-
-                        <div class="form-group form-group--inline">
-                            <label>
-                                Kod pocztowy <input type="text" name="postcode" />
+                            <label> Ulica
+                                <form:input path="street" type="text"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
+                            <label> Miasto
+                                <form:input path="city" type="text"/>
+                            </label>
+
+                        </div>
+
+                        <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="phone" name="phone" />
+                                Kod pocztowy
+                                <form:input path="zipCode" type="text"/>
                             </label>
                         </div>
+
                     </div>
 
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="data" /> </label>
+                            <label> Data
+                                <form:input path="pickUpDate" type="date" pattern="yyyy-MM-dd"/>
+                            </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="time" /> </label>
+                            <label> Godzina
+                                <form:input path="pickUpTime" type="time"/>
+                            </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea name="more_info" rows="5"></textarea>
+                                <form:input path="pickUpComment" type="textarea"/>
                             </label>
                         </div>
                     </div>
@@ -220,7 +207,6 @@
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
-
             <!-- STEP 6 -->
             <div data-step="5">
                 <h3>Podsumowanie Twojej darowizny</h3>
@@ -249,7 +235,12 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
+                                <li>
+                                    <%
+                                        out.println((String)session.getAttribute("street"));
+                                    %>
+
+                                </li>
                                 <li>Warszawa</li>
                                 <li>99-098</li>
                                 <li>123 456 789</li>

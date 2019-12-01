@@ -2,10 +2,7 @@ package pl.coderslab.charity.Donation;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.Category.Category;
 import pl.coderslab.charity.Category.CategoryRepository;
 import pl.coderslab.charity.Insitution.Institution;
@@ -35,7 +32,8 @@ public class DonationController {
     }
 
     @PostMapping("/add")
-    public String addDonation(@ModelAttribute Donation donation) {
+    public String addDonation(@ModelAttribute Donation donation, @RequestParam List<Category> categories) {
+        donation.setCategoryList(categories);
         donationRepository.save(donation);
         return "redirect:/";
     }
@@ -49,5 +47,5 @@ public class DonationController {
     public List<Institution> fetchAllInstitutions() {
         return institutionRepository.findAll();
     }
-    
+
 }
