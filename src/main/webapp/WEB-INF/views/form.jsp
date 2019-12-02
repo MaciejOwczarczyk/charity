@@ -216,7 +216,7 @@
                         <h4>Oddajesz:</h4>
                         <ul>
                             <li>
-                                <span class="icon icon-bag"></span>
+                                <span></span>
                                 <span class="summary--text"
                                 >4 worki ubrań w dobrym stanie dla dzieci</span
                                 >
@@ -235,12 +235,7 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>
-                                    <%
-                                        out.println((String)session.getAttribute("street"));
-                                    %>
-
-                                </li>
+                                <li></li>
                                 <li>Warszawa</li>
                                 <li>99-098</li>
                                 <li>123 456 789</li>
@@ -272,4 +267,15 @@
 
 <script src="../../../resources/js/app.js"></script>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var inputid = document.getElementById("dupa").value;
+        var inputid2 = document.getElementById("dupa2").value;
+
+        console.log(inputid);
+        console.log(inputid2);
+
+    });
+</script>
 </html>

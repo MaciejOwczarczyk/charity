@@ -97,24 +97,25 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
+            <c:forEach items="${institutions}" var="institution" varStatus="status" step="2">
+                <li>
+                    <div class="col">
+                        <c:if test="${status.index % 2 == 0}">
+                            <div class="title">${institutions[status.index].name}</div>
+                            <div class="subtitle">${institutions[status.index].description}</div>
+                        </c:if>
+                    </div>
 
-        <c:forEach items="${institutions}" var="institution" varStatus="status">
-            <li>
-                <c:if test="${status.index % 2 == 0}">
                     <div class="col">
-                        <div class="title">${institution.name}</div>
-                        <div class="subtitle">${institution.description}</div>
+                    <c:if test="${status.index + 1 % 2 != 0}">
+                            <div class="title">${institutions[status.index + 1].name}</div>
+                            <div class="subtitle">${institutions[status.index + 1].description}</div>
+                    </c:if>
                     </div>
-                    <br>
-                </c:if>
-                <c:if test="${status.index % 2 != 0}">
-                    <div class="col">
-                        <div class="title">${institution.name}</div>
-                        <div class="subtitle">${institution.description}</div>
-                    </div>
-                </c:if>
-            </li>
-        </c:forEach>
+
+                </li>
+            </c:forEach>
+
         </ul>
     </div>
 
