@@ -71,6 +71,7 @@ pre {
   /* 2 */
 }
 
+
 /* Text-level semantics
    ========================================================================== */
 /**
@@ -93,6 +94,7 @@ abbr[title] {
   /* 2 */
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
+  font-size: 20px;
   /* 2 */
 }
 
@@ -538,7 +540,7 @@ form .form-group textarea {
   max-width: 200px;
   width: 100%;
   resize: none;
-  font-size: 1.8rem;
+  font-size: 5.0rem;
 }
 
 /* line 21, scss/modules/_forms.scss */
@@ -584,7 +586,7 @@ form .form-group--checkbox {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: 1.8rem;
+  font-size: 20.0em;
 }
 
 /* line 53, scss/modules/_forms.scss */
@@ -1657,6 +1659,7 @@ footer .bottom-line--icons a img {
 .form--steps-instructions {
   background-color: #f9c910;
   padding: 40px 0;
+  font-size: 5.0rem;
 }
 
 /* line 62, scss/style.scss */
