@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
   <head>
@@ -14,25 +15,42 @@
   <body>
   <%@ include file="../../../WEB-INF/views/header.jsp"%>
 
+  <form:form method="post" modelAttribute="user">
+
     <section class="login-page">
       <h2>Załóż konto</h2>
       <form>
         <div class="form-group">
-          <input type="email" name="email" placeholder="Email" />
+          <form:input path="firstName" type="text" placeholder="Imię"/>
+          <form:errors cssClass="error" path="firstName">Nie może być puste</form:errors>
         </div>
         <div class="form-group">
-          <input type="password" name="password" placeholder="Hasło" />
+          <form:input path="lastName" type="text" placeholder="Nazwisko"/>
+          <form:errors cssClass="error" path="firstName">Nie może być puste</form:errors>
+        </div>
+        <div class="form-group">
+          <form:input path="email" type="email" placeholder="Email"/>
+          <form:errors cssClass="error" path="email">Nie może być puste i musi być emailem</form:errors>
+        </div>
+        <div class="form-group">
+          <form:input path="password" type="password" placeholder="hasło"/>
+          <form:errors cssClass="error" path="password">Nie może być puste</form:errors>
         </div>
         <div class="form-group">
           <input type="password" name="password2" placeholder="Powtórz hasło" />
+          <c:if test="${passwordFail == true}">
+              Hasła nie są takie same
+          </c:if>
         </div>
 
         <div class="form-group form-group--buttons">
           <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
-          <button class="btn" type="submit">Załóż konto</button>
+
+          <input type="submit" class="btn" value="Załóż konto">
         </div>
       </form>
     </section>
+  </form:form>
 
     <%@ include file="../../../WEB-INF/views/footer.jsp"%>
   </body>
