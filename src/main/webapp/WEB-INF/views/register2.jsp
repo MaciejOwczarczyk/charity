@@ -21,30 +21,13 @@
       <h2>Załóż konto</h2>
       <form>
         <div class="form-group">
-          <form:input path="firstName" type="text" placeholder="Imię"/>
-          <form:errors cssClass="error" path="firstName">Nie może być puste</form:errors>
+          <form:input path="username" type="email" placeholder="Użytkownik"/>
         </div>
         <div class="form-group">
-          <form:input path="lastName" type="text" placeholder="Nazwisko"/>
-          <form:errors cssClass="error" path="firstName">Nie może być puste</form:errors>
+          <form:input path="password" type="password" placeholder="Hasło"/>
         </div>
-        <div class="form-group">
-          <form:input path="email" type="email" placeholder="Email"/>
-          <form:errors cssClass="error" path="email">Nie może być puste i musi być emailem</form:errors>
-        </div>
-        <div class="form-group">
-          <form:input path="password" type="password" placeholder="hasło"/>
-          <form:errors cssClass="error" path="password">Nie może być puste</form:errors>
-        </div>
-        <div class="form-group">
-          <input type="password" name="password2" placeholder="Powtórz hasło" />
-          <c:if test="${passwordFail == true}">
-              Hasła nie są takie same
-          </c:if>
-        </div>
-
         <div class="form-group form-group--buttons">
-          <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
+          <a href="/login" class="btn btn--without-border">Zaloguj się</a>
 
           <input type="submit" class="btn" value="Załóż konto">
         </div>
@@ -52,6 +35,6 @@
     </section>
   </form:form>
 
-    <%@ include file="../../../WEB-INF/views/footer.jsp"%>
+  <%@ include file="../../../WEB-INF/views/footer.jsp"%>
   </body>
 </html>

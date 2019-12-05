@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -16,19 +19,22 @@
 
 <section class="login-page">
     <h2>Zaloguj się</h2>
+    <form action='<spring:url value="/loginAction"/>' method="post">
     <form>
         <div class="form-group">
-            <input type="email" name="email" placeholder="Email" />
+            <input name="username" type="text" placeholder="Email" />
         </div>
         <div class="form-group">
             <input type="password" name="password" placeholder="Hasło" />
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+<%--            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>--%>
         </div>
 
         <div class="form-group form-group--buttons">
-            <a href="#" class="btn btn--without-border">Załóż konto</a>
-            <button class="btn" type="submit">Zaloguj się</button>
+            <a href="/register" class="btn btn--without-border">Załóż konto</a>
+
+            <button type="submit" class="btn">Login</button>
         </div>
+    </form>
     </form>
 </section>
 
