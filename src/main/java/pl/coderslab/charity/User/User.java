@@ -1,8 +1,10 @@
 package pl.coderslab.charity.User;
 
 import pl.coderslab.charity.Authorities.Authorities;
+import pl.coderslab.charity.Insitution.Institution;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,17 +13,26 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "username")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "password", nullable = false)
+    @NotBlank
     private String password;
 
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Authorities> authorities = new HashSet<>();
+    @Column(nullable = false, name = "first_name")
+    @NotBlank
+    private String firstName;
+
+    @Column(nullable = false, name = "last_name")
+    @NotBlank
+    private String lastName;
 
     public User() {
     }
@@ -50,11 +61,30 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<Authorities> getAuthorities() {
-        return authorities;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAuthorities(Set<Authorities> authorities) {
-        this.authorities = authorities;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
 }

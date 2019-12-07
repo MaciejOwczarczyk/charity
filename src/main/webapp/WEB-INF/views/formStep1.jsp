@@ -10,31 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../../resources/css/style.css" />
+    <link href='<c:url value="../../resources/css/style2.css"/>' rel="stylesheet" type="text/css">
 </head>
 <body>
-<header class="header--form-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Witaj Agata
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Ustawienia</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
 
-        <ul>
-            <li><a href="/donation/add" class="btn btn--without-border active">Start</a></li>
-            <li><a href="/#steps" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="/#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="/#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="/#contact" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
-    </nav>
+<header class="header--form-page">
+    <%@ include file="header.jsp"%>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -67,11 +48,11 @@
 <section>
     <div class="form--steps-instructions">
         <div class="form--steps-container">
-            <h1>Ważne!</h1>
-            <h2>
+            <H2>Ważne!</H2>
+            <H5>
                 Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
                 wiedzieć komu najlepiej je przekazać.
-            </h2>
+            </H5>
         </div>
     </div>
 
@@ -88,18 +69,15 @@
             <div>
                 <h2>Zaznacz co chcesz oddać:</h2>
 
-<%--                <c:forEach items="${categories}" var="category">--%>
-<%--                    <div class="form-group form-group--checkbox">--%>
-<%--                        <label>--%>
-<%--&lt;%&ndash;                            <input type="checkbox" name="categories" value="${category.id}"/>&ndash;%&gt;--%>
-<%--                            <form:checkbox path="categoryList" value="${category.id}" name="categories"/>--%>
-<%--                            <span class="checkbox"></span>--%>
-<%--                            <span class="description">${category.name}</span>--%>
-<%--                        </label>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
-
-                <form:checkboxes path="categoryList" items="${categories}" itemValue="id" itemLabel="name" cssClass="form-group form-group--checkbox description checkbox"/>
+                <c:forEach items="${categories}" var="category">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="checkbox" name="categories" value="${category.id}"/>
+                            <span class="checkbox"></span>
+                            <span class="description">${category.name}</span>
+                        </label>
+                    </div>
+                </c:forEach>
 
                 <br>
                 <br>
@@ -108,11 +86,8 @@
                 <br>
                 <br>
                 <br>
-
-
 
                 <div class="form-group form-group--buttons">
-<%--                    <button type="button" class="btn next-step">Dalej</button>--%>
                     <input type="submit" class="btn next-step" value="Dalej">
                 </div>
                 <br/>
@@ -125,8 +100,8 @@
     </div>
 </section>
 
-<%@ include file="../../../WEB-INF/views/footer.jsp"%>
+<%@ include file="footer.jsp"%>
 
-<script src="../../../resources/js/app.js"></script>
+<script src="<c:url value='../../resources/js/app.js'/>" type="text/javascript"></script>
 </body>
 </html>

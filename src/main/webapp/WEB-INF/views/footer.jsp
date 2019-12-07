@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link href='<c:url value="../../resources/css/style.css"/>' rel="stylesheet" type="text/css">
+    <link href='<c:url value="../../resources/css/style2.css"/>' rel="stylesheet" type="text/css">
 </head>
 <body>
 <footer>

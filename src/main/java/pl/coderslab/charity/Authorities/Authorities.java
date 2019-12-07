@@ -9,12 +9,15 @@ import javax.persistence.*;
 public class Authorities {
 
     @Id
-    @Column(name = "authority")
-    private String authority;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(referencedColumnName = "username", name = "username")
     private User user;
+
+    @Column(name = "authority")
+    private String authority;
 
     public Authorities() {
     }
@@ -34,4 +37,16 @@ public class Authorities {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+
 }

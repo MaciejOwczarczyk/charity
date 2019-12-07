@@ -10,31 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../../resources/css/style.css" />
+    <link href='<c:url value="../../resources/css/style2.css"/>' rel="stylesheet" type="text/css">
 </head>
 <body>
 <header class="header--form-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Witaj Agata
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Ustawienia</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <ul>
-            <li><a href="/donation/add" class="btn btn--without-border active">Start</a></li>
-            <li><a href="" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="index.html#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
-    </nav>
+    <%@ include file="header.jsp"%>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -66,13 +46,13 @@
 
 <section>
 
-    <div class="form--steps-container">
+    <div class="form--steps-container description">
 
         <form:form modelAttribute="donation" method="post">
             <div data-step="1">
                 <h2>Podsumowanie Twojej darowizny</h2>
 
-                <div class="summary">
+                <div class="summary description">
                     <div class="form-section">
                         <h2>Oddajesz:</h2>
                         <ul>
@@ -96,7 +76,7 @@
                     </div>
 
                     <div class="form-section form-section--columns title">
-                        <div class="form-section--column">
+                        <div class="form-section--column description">
                             <h1>Adres odbioru:</h1>
                             <ul>
                                 <li>${donation.street}</li>
@@ -133,8 +113,8 @@
 
 
 
-<%@ include file="../../../WEB-INF/views/footer.jsp"%>
+<%@ include file="footer.jsp"%>
 
-<script src="../../../resources/js/app.js"></script>
+<script src="<c:url value='../../resources/js/app.js'/>" type="text/javascript"></script>
 </body>
 </html>

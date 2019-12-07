@@ -36,9 +36,17 @@ public class DonationController {
     }
 
     @GetMapping("/addStep2")
-    public String addDonation(@ModelAttribute Donation donation, Model model, HttpSession session, HttpServletRequest request, SessionStatus sessionStatus) {
+    public String addDonation(@ModelAttribute Donation donation, Model model, HttpSession session, HttpServletRequest request, SessionStatus sessionStatus, @RequestParam(required = false) List<Category> categories) {
         Donation donation1 = (Donation) session.getAttribute("donation");
-        donation1.setCategoryList(donation.getCategoryList());
+        try {
+            if (donation.getCategoryList().size() > 0){
+                model.addAttribute("donation", donation1);
+                return "formStep2";
+            }
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        donation1.setCategoryList(categories);
         model.addAttribute("donation", donation1);
         return "formStep2";
     }

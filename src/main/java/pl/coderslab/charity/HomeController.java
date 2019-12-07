@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.Authorities.Authorities;
 import pl.coderslab.charity.Authorities.AuthoritiesRepository;
 import pl.coderslab.charity.Category.CategoryRepository;
@@ -18,9 +17,7 @@ import pl.coderslab.charity.User.User;
 import pl.coderslab.charity.User.UserRepository;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -52,10 +49,24 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public String register(@ModelAttribute @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
+            return "register2";
+        }
+        List<User> users = userRepository.findAll();
+        boolean check = users.stream().map(o -> o.getUsername().toLowerCase()).anyMatch(o -> o.equals(user.getUsername().toLowerCase()));
+        if (check) {
+            model.addAttribute("registerFail", true);
+            return "register2";
+        }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setEnabled(true);
         userRepository.save(user);
+        Authorities authorities = new Authorities();
+        authorities.setAuthority("ROLE_USER");
+        authorities.setUser(user);
+        authoritiesRepository.save(authorities);
         return "redirect:/login";
     }
 

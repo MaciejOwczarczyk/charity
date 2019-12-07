@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,10 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    public WebSecurityConfig(DataSource dataSource) {
+    public WebSecurityConfig(DataSource dataSource, AuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.dataSource = dataSource;
     }
 
@@ -42,10 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/user/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll().loginProcessingUrl("/loginAction").permitAll()
+                .loginPage("/login").permitAll()
+                .successHandler(authenticationSuccessHandler)
+                .loginProcessingUrl("/loginAction").permitAll()
                 .and()
                 .csrf().disable()
                 .logout().logoutSuccessUrl("/")
