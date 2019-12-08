@@ -9,4 +9,6 @@ public interface InstitutionRepository extends JpaRepository<Institution, Long> 
 
     @Query(value = "select count(*) from `charity-donation`.institutions", nativeQuery = true)
     Long countAll();
+
+    Institution findAllById(Long id);
 }

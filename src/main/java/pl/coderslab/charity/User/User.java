@@ -5,35 +5,40 @@ import pl.coderslab.charity.Insitution.Institution;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
     @NotBlank
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @Column(nullable = false, name = "first_name")
     @NotBlank
+    @Column(nullable = false, name = "first_name")
     private String firstName;
 
-    @Column(nullable = false, name = "last_name")
     @NotBlank
+    @Column(nullable = false, name = "last_name")
     private String lastName;
 
+//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//    private List<Authorities> authorities;
     public User() {
     }
 
@@ -85,6 +90,11 @@ public class User {
         this.id = id;
     }
 
+//    public List<Authorities> getAuthorities() {
+//        return authorities;
+//    }
 
-
+//    public void setAuthorities(List<Authorities> authorities) {
+//        this.authorities = authorities;
+//    }
 }

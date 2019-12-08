@@ -64,7 +64,7 @@ public class HomeController {
         user.setEnabled(true);
         userRepository.save(user);
         Authorities authorities = new Authorities();
-        authorities.setAuthority("ROLE_USER");
+        authorities.setAuthority("ROLE_ADMIN");
         authorities.setUser(user);
         authoritiesRepository.save(authorities);
         return "redirect:/login";

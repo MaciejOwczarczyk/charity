@@ -3,6 +3,7 @@ package pl.coderslab.charity.Insitution;
 import pl.coderslab.charity.User.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -13,8 +14,12 @@ public class Institution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String name;
 
+    @NotBlank
+    @Column(nullable = false)
     private String description;
 
 
