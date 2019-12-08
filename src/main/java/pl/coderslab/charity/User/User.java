@@ -37,8 +37,7 @@ public class User implements Serializable {
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private List<Authorities> authorities;
+
     public User() {
     }
 

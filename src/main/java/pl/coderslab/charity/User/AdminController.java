@@ -1,5 +1,7 @@
 package pl.coderslab.charity.User;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -160,9 +162,35 @@ public class AdminController {
         return "redirect:/admin/adminShowAll";
     }
 
+    @GetMapping("/adminDelete/{id}")
+    public String deleteAdmin(@PathVariable Long id, @AuthenticationPrincipal UserDetails customUser, Model model) {
+        User user = userRepository.findAllById(id);
+        if (customUser.getUsername().equals(user.getUsername())) {
+            model.addAttribute("failRemove", true);
+            List<Authorities> authorities = authoritiesRepository.findAllByAuthority("ROLE_ADMIN");
+            List<User> admins = authorities.stream().map(Authorities::getUser).collect(Collectors.toList());
+            model.addAttribute("admins", admins);
+            return "admin/showAllAdmins";
+        }
+        List<Authorities> authorities = authoritiesRepository.findAll();
+        for (Authorities authority : authorities) {
+            if (authority.getUser().getId().equals(user.getId())) {
+                authoritiesRepository.delete(authority);
+            }
+        }
+        userRepository.delete(user);
+        return "redirect:/admin/adminShowAll";
+
+    }
+
     private String encodePassword(String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.encode(password);
     }
+
+
+
+
+
 
 }

@@ -358,7 +358,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <c:if test="${failRemove == true}">
-                                    <tr class="error">Do tej fundacji przypisano dary, nie może jej usunąc !</tr>
+                                    <tr class="error">Ten administrator jest aktualnie zalogowany, nie możesz go usunąć !</tr>
                                     <br/>
                                 </c:if>
                                 <tr>
