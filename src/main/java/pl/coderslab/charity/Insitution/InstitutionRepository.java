@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface InstitutionRepository extends JpaRepository<Institution, Long> {
 
-    @Query(value = "select count(*) from `charity-donation`.institutions", nativeQuery = true)
+    @Query(value = "select count(*) from `charity`.institutions", nativeQuery = true)
     Long countAll();
 
     Institution findAllById(Long id);

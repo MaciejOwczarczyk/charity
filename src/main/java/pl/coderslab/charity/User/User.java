@@ -26,7 +26,7 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "enabled", nullable = false)
+    @Column(name = "enabled")
     private boolean enabled;
 
     @NotBlank
@@ -39,6 +39,8 @@ public class User implements Serializable {
 
 
     public User() {
+        super();
+        this.enabled = false;
     }
 
     public String getUsername() {
